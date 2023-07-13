@@ -1,1 +1,1 @@
-images_dir = "../../Desktop/Images"
+images_dir = "../../Images"

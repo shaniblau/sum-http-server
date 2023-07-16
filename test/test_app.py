@@ -1,3 +1,5 @@
+from fastapi import UploadFile
+from fastapi.testclient import TestClient
 
 
 def test_sort_files(app_fixture):
@@ -9,6 +11,17 @@ def test_sort_files(app_fixture):
     assert result == expected
 
 
+def test_create_single_file(app_fixture):
+    files = [("files", ('file_a.jpg', open('file_a.jpg', "rb"), "image/jpg")),
+             ("files", ('file_b.jpg', open('file_b.jpg', "rb"), "image/jpg"))]
+    app_fixture.create_single_file(files)
+    expected_file_content = b'ab'
+    with open('../file_jpg', 'rb') as file:
+        result = file.read()
+    assert expected_file_content == result
+
+
 class File:
-    def __init__(self, filename):
+    def __init__(self, filename, content=''):
         self.filename = filename
+        self.content = content

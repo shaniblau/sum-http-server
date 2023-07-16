@@ -16,7 +16,7 @@ def test_create_single_file(app_fixture):
              ("files", ('file_b.jpg', open('file_b.jpg', "rb"), "image/jpg"))]
     app_fixture.create_single_file(files)
     expected_file_content = b'ab'
-    with open('../file_jpg', 'rb') as file:
+    with open('../../images/file_jpg', 'rb') as file:
         result = file.read()
     assert expected_file_content == result
 

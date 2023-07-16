@@ -12,8 +12,8 @@ def test_sort_files(app_fixture):
 
 
 def test_create_single_file(app_fixture):
-    files = [("files", ('file_a.jpg', open('file_a.jpg', "rb"), "image/jpg")),
-             ("files", ('file_b.jpg', open('file_b.jpg', "rb"), "image/jpg"))]
+    files = [("files", ('file_a.txt', open('file_a.txt', "rb"), "image/jpg")),
+             ("files", ('file_b.txt', open('file_b.txt', "rb"), "image/jpg"))]
     app_fixture.create_single_file(files)
     expected_file_content = b'ab'
     with open('../../images/file_jpg', 'rb') as file:

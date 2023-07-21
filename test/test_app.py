@@ -26,11 +26,13 @@ def test_sort_files(app_fixture):
 
 def test_create_single_file(app_fixture, mocker):
     create_files()
-    images_dir = str('/home/runner/work/sum-http-client/images')
+    images_dir = '/home/runner/work/sum-http-client/images'
     files = [
         UploadFile(filename='file_a.jpg', file=open('/home/runner/work/sum-http-client/images/file_a', "rb")),
         UploadFile(filename='file_b.jpg', file=open('/home/runner/work/sum-http-client/images/file_b', "rb")),
     ]
+    print(f"images_dir: {images_dir}")
+    print(f"files: {files}")
     mocker.patch('app.sign_file')
     with patch('app.open',
                side_effect=lambda file, mode: builtins.open(os.path.join(images_dir, file), mode)) as mock_file:
@@ -54,6 +56,3 @@ def create_files():
         file.write(b'a')
     with open('/home/runner/work/sum-http-client/images/file_b', 'wb') as file:
         file.write(b'b')
-
-
-

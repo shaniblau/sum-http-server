@@ -31,12 +31,9 @@ def test_create_single_file(app_fixture, mocker):
         UploadFile(filename='file_a.jpg', file=open('/home/runner/work/sum-http-client/images/file_a', "rb")),
         UploadFile(filename='file_b.jpg', file=open('/home/runner/work/sum-http-client/images/file_b', "rb")),
     ]
-    print(f"images_dir: {images_dir}")
-    print(f"files: {files}")
+    mocker.patch('app.open', side_effect=lambda file, mode: builtins.open(os.path.join(images_dir, file), mode))
     mocker.patch('app.sign_file')
-    with patch('app.open',
-               side_effect=lambda file, mode: builtins.open(os.path.join(images_dir, file), mode)) as mock_file:
-        app_fixture.create_single_file(files)
+    app_fixture.create_single_file(files)
     expected = b'ab'
     with open(os.path.join(images_dir, 'file.jpg'), 'rb') as file:
         result = file.read()

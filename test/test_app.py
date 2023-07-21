@@ -1,10 +1,14 @@
+import builtins
 import os
+from unittest.mock import patch
+
 from fastapi import UploadFile
 from fastapi.testclient import TestClient
 
 
 def test_create_upload_file_endpoint(app_fixture):
     client = TestClient(app_fixture.app)
+    create_files()
     files = [('files', ('file_a', open('/home/runner/work/sum-http-client/images/file_a', "rb"), "image/jpg")),
              ('files', ('file_b', open('/home/runner/work/sum-http-client/images/file_b', "rb"), "image/jpg"))]
     response = client.post("/uploadfile", files=files)
@@ -25,7 +29,9 @@ def test_create_single_file(app_fixture, mocker):
     files = [UploadFile(filename='file_a', file=open('/home/runner/work/sum-http-client/images/file_a', "rb")),
              UploadFile(filename='file_a', file=open('/home/runner/work/sum-http-client/images/file_a', "rb"))]
     mocker.patch('app.sign_file')
-    app_fixture.create_single_file(files)
+    with patch('load_files.open',
+               side_effect=lambda file, mode: builtins.open(os.path.abspath(file), mode)) as mock_file:
+        app_fixture.create_single_file(files)
     expected = b'ab'
     with open('/home/runner/work/sum-http-client/images/file.jpg', 'rb') as file:
         result = file.read()

@@ -5,10 +5,8 @@ from fastapi.testclient import TestClient
 
 def test_create_upload_file_endpoint(app_fixture):
     client = TestClient(app_fixture.app)
-    files = [
-        ("file_a.jpg", b"Test file content A"),
-        ("file_b.jpg", b"Test file content B"),
-    ]
+    files = [('files', ('file_a', open('/home/runner/work/sum-http-client/images/file_a', "rb"), "image/jpg")),
+             ('files', ('file_b', open('/home/runner/work/sum-http-client/images/file_b', "rb"), "image/jpg"))]
     response = client.post("/uploadfile", files=files)
     assert response.status_code == 200
 

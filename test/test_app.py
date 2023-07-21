@@ -29,7 +29,7 @@ def test_create_single_file(app_fixture, mocker):
     files = [UploadFile(filename='file_a', file=open('/home/runner/work/sum-http-client/images/file_a', "rb")),
              UploadFile(filename='file_a', file=open('/home/runner/work/sum-http-client/images/file_a', "rb"))]
     mocker.patch('app.sign_file')
-    with patch('load_files.open',
+    with patch('app.open',
                side_effect=lambda file, mode: builtins.open(os.path.abspath(file), mode)) as mock_file:
         app_fixture.create_single_file(files)
     expected = b'ab'

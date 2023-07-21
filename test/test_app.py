@@ -1,5 +1,7 @@
 import builtins
 import os
+
+import pytest
 from fastapi import UploadFile
 from fastapi.testclient import TestClient
 
@@ -22,6 +24,7 @@ def test_sort_files(app_fixture):
     assert result == expected
 
 
+@pytest.mark.asyncio
 async def test_create_single_file(app_fixture, mocker):
     create_files()
     images_dir = '/home/runner/work/sum-http-client/images'

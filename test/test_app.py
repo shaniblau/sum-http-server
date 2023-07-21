@@ -28,8 +28,8 @@ def test_create_single_file(app_fixture, mocker):
     create_files()
     images_dir = str('/home/runner/work/sum-http-client/images')
     files = [
-        UploadFile(filename='file_a.jpg', file=open('/path/to/test/images/file_a.jpg', "rb")),
-        UploadFile(filename='file_b.jpg', file=open('/path/to/test/images/file_b.jpg', "rb")),
+        UploadFile(filename='file_a.jpg', file=open('/home/runner/work/sum-http-client/images/file_a', "rb")),
+        UploadFile(filename='file_b.jpg', file=open('/home/runner/work/sum-http-client/images/file_b', "rb")),
     ]
     mocker.patch('app.sign_file')
     with patch('app.open',

@@ -26,14 +26,17 @@ def test_sort_files(app_fixture):
 
 def test_create_single_file(app_fixture, mocker):
     create_files()
-    files = [UploadFile(filename='file_a', file=open('/home/runner/work/sum-http-client/images/file_a', "rb")),
-             UploadFile(filename='file_a', file=open('/home/runner/work/sum-http-client/images/file_a', "rb"))]
+    images_dir = str('/home/runner/work/sum-http-client/images')
+    files = [
+        UploadFile(filename='file_a.jpg', file=open('/path/to/test/images/file_a.jpg', "rb")),
+        UploadFile(filename='file_b.jpg', file=open('/path/to/test/images/file_b.jpg', "rb")),
+    ]
     mocker.patch('app.sign_file')
     with patch('app.open',
-               side_effect=lambda file, mode: builtins.open(os.path.abspath(file), mode)) as mock_file:
+               side_effect=lambda file, mode: builtins.open(os.path.join(images_dir, file), mode)) as mock_file:
         app_fixture.create_single_file(files)
     expected = b'ab'
-    with open('/home/runner/work/sum-http-client/images/file.jpg', 'rb') as file:
+    with open(os.path.join(images_dir, 'file.jpg'), 'rb') as file:
         result = file.read()
     assert result == expected
 

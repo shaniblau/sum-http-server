@@ -4,7 +4,7 @@ from fastapi.testclient import TestClient
 
 
 def test_create_upload_file_endpoint(app_fixture):
-    client = TestClient(app_fixture)
+    client = TestClient(app_fixture.app)
     files = [
         ("file_a.jpg", b"Test file content A"),
         ("file_b.jpg", b"Test file content B"),
@@ -26,7 +26,7 @@ def test_create_single_file(app_fixture, mocker):
     create_files()
     files = [UploadFile(filename='file_a', file=open('/home/runner/work/sum-http-client/images/file_a', "rb")),
              UploadFile(filename='file_a', file=open('/home/runner/work/sum-http-client/images/file_a', "rb"))]
-    mocker.patch('app.sing_file')
+    mocker.patch('app.sign_file')
     app_fixture.create_single_file(files)
     expected = b'ab'
     with open('/home/runner/work/sum-http-client/images/file.jpg', 'rb') as file:

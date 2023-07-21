@@ -33,7 +33,7 @@ def test_create_single_file(app_fixture, mocker):
     ]
     mocker.patch('app.open', side_effect=lambda file, mode: builtins.open(os.path.join(images_dir, file), mode))
     mocker.patch('app.sign_file')
-    app_fixture.create_single_file(files)
+    await app_fixture.create_single_file(files)
     expected = b'ab'
     with open(os.path.join(images_dir, 'file.jpg'), 'rb') as file:
         result = file.read()

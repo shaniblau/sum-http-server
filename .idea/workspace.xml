@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="2f2077b0-2986-4b10-9997-0a55dd463c40" name="Changes" comment="" />
+    <list default="true" id="2f2077b0-2986-4b10-9997-0a55dd463c40" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sum-http-server.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sum-http-server.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_a.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_b.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_app.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -29,7 +39,8 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/nadav/PycharmProjects/finalproj"
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/shaniblau/Documents/pythonProjects/sum-http-server"
   }
 }]]></component>
   <component name="RecentsManager">

@@ -33,11 +33,10 @@ async def test_create_single_file(app_fixture, mocker):
         UploadFile(filename='file_a.jpg', file=open('/home/runner/work/sum-http-client/images/file_a', "rb")),
         UploadFile(filename='file_b.jpg', file=open('/home/runner/work/sum-http-client/images/file_b', "rb")),
     ]
-    mocker.patch('app.open', side_effect=lambda file, mode: builtins.open(os.path.join(images_dir, file), mode))
     mocker.patch('app.sign_file')
     await app_fixture.create_single_file(files)
     expected = b'ab'
-    with open(os.path.join('/home/runner/work/sum-http-client/images', 'file.jpg'), 'rb') as file:
+    with open(os.path.join(images_dir, 'file.jpg'), 'rb') as file:
         result = file.read()
     assert result == expected
 

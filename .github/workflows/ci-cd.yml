@@ -35,6 +35,12 @@ jobs:
 
     needs: ci
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        location:
+          - 'shani@20.16.214.172'
+          - 'shani@108.143.20.222'
+          - 'shani@20.16.208.103'
 
     steps:
       - uses: actions/checkout@v3
@@ -44,7 +50,7 @@ jobs:
         run: sudo apt-get install -y sshpass
       - name: download app
         run: |
-          sshpass -p 'Password123!' ssh -o StrictHostKeyChecking=no shani@20.16.214.172 <<EOF
+          sshpass -p 'Password123!' ssh -o StrictHostKeyChecking=no ${{ matrix.location }} <<EOF
           rm -r orientation-haproxy-server
           git clone https://github.com/shaniblau/sum-http-server.git
           cd sum-http-server 

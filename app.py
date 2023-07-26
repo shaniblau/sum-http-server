@@ -34,7 +34,7 @@ async def create_single_file(files: List[UploadFile]):
         for f in files:
             file.write(await f.read())
     sign_file(path)
-    log.info(f'{file_name} created successfully')
+    log.info(f'{path} created successfully')
 
 
 def sign_file(file_path):

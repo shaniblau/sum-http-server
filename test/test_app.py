@@ -1,6 +1,6 @@
 import builtins
 import os
-
+from unittest.mock import patch
 import pytest
 from fastapi import UploadFile
 from fastapi.testclient import TestClient
@@ -25,6 +25,7 @@ def test_sort_files(app_fixture):
 
 
 @pytest.mark.asyncio
+@patch('app.images_dir', '/home/runner/work/sum-http-client/images')
 async def test_create_single_file(app_fixture, mocker):
     create_files()
     images_dir = '/home/runner/work/sum-http-client/images'
@@ -36,7 +37,7 @@ async def test_create_single_file(app_fixture, mocker):
     mocker.patch('app.sign_file')
     await app_fixture.create_single_file(files)
     expected = b'ab'
-    with open(os.path.join('/home/runner/work/images', 'file.jpg'), 'rb') as file:
+    with open(os.path.join('/home/runner/work/sum-http-client/images', 'file.jpg'), 'rb') as file:
         result = file.read()
     assert result == expected
 

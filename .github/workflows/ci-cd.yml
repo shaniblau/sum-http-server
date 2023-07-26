@@ -42,11 +42,14 @@ jobs:
           fetch-depth: 0
       - name: Install SSH client
         run: sudo apt-get install -y sshpass
-      - name: upload app
+      - name: download app
         run: |
           sshpass -p 'Password123!' ssh -o StrictHostKeyChecking=no shani@20.16.214.172 <<EOF
           rm -r orientation-haproxy-server
           git clone https://github.com/shaniblau/sum-http-server.git
-          cd sum-http-server
+          cd sum-http-server 
+          mv http_server.service ../../../etc/systemd/system/ 
           pip install -r requirements.txt
+          sudo systemctl enable http_server.service
+          sudo systemctl start http_server
           EOF

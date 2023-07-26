@@ -1,0 +1,11 @@
+[Unit]
+Description=http server with python fast api
+
+[Service]
+ExecStart=/usr/bin/python3 /home/shani/http-server/main.py
+WorkingDirectory=/home/shani/http-server/
+Restart=always
+User=shani
+
+[Install]
+WantedBy=multi-user.target

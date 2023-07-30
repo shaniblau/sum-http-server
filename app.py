@@ -1,7 +1,7 @@
 import logging as log
 import os
 from typing import List
-import config
+from config import images_dir
 from fastapi import FastAPI, UploadFile
 
 from sign_file import execute
@@ -13,8 +13,8 @@ log.basicConfig(filename='files_created.log', filemode='a', level=log.INFO,
 
 @app.post("/uploadfile")
 async def create_upload_file(files: List[UploadFile]):
-    if not os.path.exists(config.images_dir):
-        os.mkdir(config.images_dir)
+    if not os.path.exists(images_dir):
+        os.mkdir(images_dir)
     await create_single_file(sort_files(files))
 
 

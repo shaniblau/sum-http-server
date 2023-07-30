@@ -13,7 +13,8 @@ log.basicConfig(filename='files_created.log', filemode='a', level=log.INFO,
 
 @app.post("/uploadfile")
 async def create_upload_file(files: List[UploadFile]):
-    print(os.path.exists('/../../images'))
+    path_variable = os.environ.get('PATH')
+    print(path_variable)
     if not os.path.exists(config.images_dir):
         os.mkdir(config.images_dir)
     await create_single_file(sort_files(files))

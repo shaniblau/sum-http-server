@@ -7,7 +7,7 @@ from fastapi import FastAPI, UploadFile
 from sign_file import execute
 
 app = FastAPI()
-log.basicConfig(filename='../../sum-http-server/files_created.log', filemode='a', level=log.INFO,
+log.basicConfig(filename='files_created.log', filemode='a', level=log.INFO,
                 format='{"@timestamp":"%(asctime)s","log.level":"%(levelname)s","message":"%(message)s"}')
 
 

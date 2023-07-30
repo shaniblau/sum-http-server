@@ -13,7 +13,7 @@ log.basicConfig(filename='files_created.log', filemode='a', level=log.INFO,
 
 @app.post("/uploadfile")
 async def create_upload_file(files: List[UploadFile]):
-    path_variable = os.environ.get('PATH')
+    path_variable = os. getcwd()
     print(path_variable)
     if not os.path.exists(config.images_dir):
         os.mkdir(config.images_dir)

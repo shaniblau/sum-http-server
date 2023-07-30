@@ -30,7 +30,7 @@ async def test_create_single_file(app_fixture, mocker):
         UploadFile(filename='file_a.jpg', file=open('/home/runner/work/sum-http-client/images/file_a', "rb")),
         UploadFile(filename='file_b.jpg', file=open('/home/runner/work/sum-http-client/images/file_b', "rb")),
     ]
-    mocker.patch('app.images_dir', images_dir)
+    mocker.patch('app.config.images_dir', images_dir)
     mocker.patch('app.sign_file')
     await app_fixture.create_single_file(files)
     expected = b'ab'

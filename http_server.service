@@ -4,7 +4,6 @@ Description=http server with python fast api
 [Service]
 ExecStart=/usr/bin/python3 /home/shani/sum-http-server/main.py
 WorkingDirectory=/home/shani/sum-http-server/
-Restart=always
 User=shani
 
 [Install]

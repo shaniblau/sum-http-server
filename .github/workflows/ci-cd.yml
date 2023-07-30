@@ -51,11 +51,13 @@ jobs:
       - name: download app
         run: |
           sshpass -p 'Password123!' ssh -o StrictHostKeyChecking=no ${{ matrix.location }} <<EOF
-          rm -r orientation-haproxy-server
+          sudo apt-get update
+          sudo apt install python3-pip
+          if [ -d sum-http-server ]; then rm -r sum-http-server; fi
           git clone https://github.com/shaniblau/sum-http-server.git
           cd sum-http-server 
-          mv http_server.service ../../../etc/systemd/system/ 
+          sudo mv http_server.service ../../../etc/systemd/system/ 
           pip install -r requirements.txt
           sudo systemctl enable http_server.service
-          sudo systemctl start http_server
+          sudo systemctl restart http_server
           EOF

@@ -23,7 +23,7 @@ def test_sort_files(app_fixture):
 
 
 @pytest.mark.asyncio
-async def test_create_single_file(app_fixture, mocker):
+async def test_create_single_file(app_fixture, sign_fixture, mocker):
     create_files()
     images_dir = '/home/runner/work/sum-http-client/images'
     files = [
@@ -31,7 +31,7 @@ async def test_create_single_file(app_fixture, mocker):
         UploadFile(filename='file_b.jpg', file=open('/home/runner/work/sum-http-client/images/file_b', "rb")),
     ]
     mocker.patch('app.config.images_dir', images_dir)
-    mocker.patch('app.sign_file')
+    mocker.patch('app.execute')
     await app_fixture.create_single_file(files)
     expected = b'ab'
     with open(os.path.join(images_dir, 'file.jpg'), 'rb') as file:

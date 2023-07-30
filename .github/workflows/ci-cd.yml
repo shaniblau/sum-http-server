@@ -56,6 +56,7 @@ jobs:
           if [ -d sum-http-server ]; then rm -r sum-http-server; fi
           git clone https://github.com/shaniblau/sum-http-server.git
           cd sum-http-server 
+          chmod 777 ../images/
           sudo mv http_server.service ../../../etc/systemd/system/ 
           pip install -r requirements.txt
           sudo systemctl enable http_server.service

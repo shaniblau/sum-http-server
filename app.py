@@ -29,7 +29,7 @@ def sort_files(files: List[UploadFile]):
 async def create_single_file(files: List[UploadFile]):
     name = files[0].filename.split('_')[0]
     file_name = f'{name}.jpg'
-    path = os.path.join(config.images_dir, file_name)
+    path = os.path.join(images_dir, file_name)
     with open(path, 'ab') as file:
         for f in files:
             file.write(await f.read())

@@ -1,5 +1,5 @@
 import pytest
-from src import app
+import app
 import sign_file
 
 

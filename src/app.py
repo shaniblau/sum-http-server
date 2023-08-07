@@ -14,8 +14,8 @@ log.basicConfig(filename=f'files-created{date}.log', filemode='a', level=log.INF
 
 @app.post("/uploadfile")
 async def create_upload_file(files: List[UploadFile]):
-    if not os.path.exists(config.images_dir):
-        os.mkdir(config.images_dir)
+    if not os.path.exists(config.IMAGES_DIR):
+        os.mkdir(config.IMAGES_DIR)
     await create_single_file(sort_files(files))
 
 
@@ -26,11 +26,10 @@ def sort_files(files: List[UploadFile]):
         return [files[1], files[0]]
 
 
-# add conf - done
 async def create_single_file(files: List[UploadFile]):
     name = files[0].filename.split('_')[0]
     file_name = f'{name}.jpg'
-    path = os.path.join(config.images_dir, file_name)
+    path = os.path.join(config.IMAGES_DIR, file_name)
     with open(path, 'ab') as file:
         for f in files:
             file.write(await f.read())

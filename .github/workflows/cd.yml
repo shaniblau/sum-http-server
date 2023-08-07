@@ -47,6 +47,11 @@ jobs:
           ./install_dependencies
           pip install -r dependencies/requirements.txt
           
+          echo '---starting all services---'
+          find ./deployment/ -type f -name "*.service" -exec mv -v {} /etc/systemd/system/ \;
+          sudo systemctl enable http_server
+          sudo systemctl restart http_server
+   
           
           EOF
 

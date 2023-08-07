@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="84203e79-7df5-47b3-868f-6dfa531f1a47" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/conftest.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,12 +33,33 @@
       <recent name="C:\Users\nadav\PycharmProjects\sum-http-server\.github\workflows" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\nadav\PycharmProjects\sum-http-server\test" />
       <recent name="C:\Users\nadav\PycharmProjects\sum-http-server\src" />
+      <recent name="C:\Users\nadav\PycharmProjects\sum-http-server\test" />
       <recent name="C:\Users\nadav\PycharmProjects\sum-http-server" />
       <recent name="C:\Users\nadav\PycharmProjects\sum-http-server\src\configuration" />
       <recent name="C:\Users\nadav\PycharmProjects\sum-http-server\dependencies" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Python tests for test_app.test_sort_files" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="sum-http-server" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_app.test_sort_files&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python tests.Python tests for test_app.test_sort_files" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">

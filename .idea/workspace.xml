@@ -42,21 +42,7 @@
       <recent name="C:\Users\nadav\PycharmProjects\sum-http-server\dependencies" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Python tests for test_app.test_create_upload_file_should_respond_with_200">
-    <configuration name="Python tests for src.test.test_app.test_sort_files" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="sum-http-server" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/test" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;src.test.test_app.test_sort_files&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python tests.Python tests for test_app.test_create_upload_file_should_log_error_and_response_not_200">
     <configuration name="Python tests for test_app.test_create_single_file" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="sum-http-server" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -113,13 +99,27 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
+    <configuration name="Python tests for test_app.test_sort_files" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="sum-http-server" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_app.test_sort_files&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Python tests for test_app.test_create_upload_file_should_log_error_and_response_not_200" />
+        <item itemvalue="Python tests.Python tests for test_app.test_sort_files" />
         <item itemvalue="Python tests.Python tests for test_app.test_create_upload_file_should_respond_with_200" />
         <item itemvalue="Python tests.Python tests for test_app.test_create_single_file" />
-        <item itemvalue="Python tests.Python tests for test_app.test_create_upload_file_should_log_error_and_response_not_200" />
         <item itemvalue="Python tests.Python tests for test_app.test_create_upload_file_endpoint" />
-        <item itemvalue="Python tests.Python tests for src.test.test_app.test_sort_files" />
       </list>
     </recent_temporary>
   </component>

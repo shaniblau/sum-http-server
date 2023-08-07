@@ -26,4 +26,4 @@ def mock_sign_fixture(mocker):
 
 @pytest.fixture
 def mock_create_encrypted_hash_fixture(mocker):
-    return mocker.patch('app.create_encrypted_hash')
+    return mocker.patch('sign_file.create_encrypted_hash')

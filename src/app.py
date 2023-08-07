@@ -1,7 +1,7 @@
 import logging as log
 import os
 from typing import List
-import config
+from src.configuration import config
 from fastapi import FastAPI, UploadFile
 from datetime import datetime
 from sign_file import execute

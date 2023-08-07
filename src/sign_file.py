@@ -14,7 +14,7 @@ def execute(file_path):
 
 def create_encrypted_hash(file_path, iv):
     sha512hash = create_sha512(file_path)
-    with open("tornado.key", "rb") as file:
+    with open("configuration/tornado.key", "rb") as file:
         key = file.read() + b"    "
     aes = AES.new(key, AES.MODE_CFB, iv)
     return aes.encrypt(sha512hash)

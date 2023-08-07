@@ -34,32 +34,24 @@ def test_sort_files_should_replace_file_a_and_file_b_locations_in_the_list(app_f
 
 @pytest.mark.asyncio
 async def test_create_single_file_should_create_a_whole_file(app_fixture, mocker, mock_sign_fixture):
-    create_files()
-    images_dir = './'
-    files = [
-        UploadFile(filename='file_a.jpg', file=open('./file_a', "rb")),
-        UploadFile(filename='file_b.jpg', file=open('./file_b', "rb")),
-    ]
-    mocker.patch('app.config.IMAGES_DIR', images_dir)
-    await app_fixture.create_single_file(files)
+    await help_test(mocker, app_fixture, mock_sign_fixture)
     expected = b'ab'
-    with open(os.path.join(images_dir, 'file.jpg'), 'rb') as file:
+    with open(os.path.join('./', 'file.jpg'), 'rb') as file:
         result = file.read()
     assert result == expected
 
 
 @pytest.mark.asyncio
 async def test_create_single_file_should_call_sign_file_once(app_fixture, mock_sign_fixture, mocker):
-    await help_test(mocker, app_fixture)
+    await help_test(mocker, app_fixture, mock_sign_fixture)
     mock_sign_fixture.assert_called_once()
 
 
-async def help_test(mocker, app_fixture):
+async def help_test(mocker, app_fixture, mock_sign_fixture):
     create_files()
-    images_dir = './'
     files = [
         UploadFile(filename='file_a.jpg', file=open('./file_a', "rb")),
         UploadFile(filename='file_b.jpg', file=open('./file_b', "rb")),
     ]
-    mocker.patch('app.config.IMAGES_DIR', images_dir)
+    mocker.patch('app.config.IMAGES_DIR', './')
     await app_fixture.create_single_file(files)

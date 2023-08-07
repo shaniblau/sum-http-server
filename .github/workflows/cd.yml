@@ -33,11 +33,11 @@ jobs:
           sshpass -p 'Password123!' ssh -o StrictHostKeyChecking=no  ${{ matrix.location }}<<EOF
           
           echo '---starting update app code---'
-          if [ -d sum-http-client ]; then 
-              cd sum-http-client
+          if [ -d sum-http-server ]; then 
+              cd sum-http-server
               git pull origin main
           else
-              git clone https://github.com/shaniblau/sum-http-client.git
+              git clone https://github.com/shaniblau/sum-http-server.git
           fi
           cd sum-http-client
           chmod 777 ../images/

@@ -3,11 +3,12 @@ import os
 from typing import List
 import config
 from fastapi import FastAPI, UploadFile
-
+from datetime import datetime
 from sign_file import execute
 
 app = FastAPI()
-log.basicConfig(filename='files_created.log', filemode='a', level=log.INFO,
+date = datetime.now().strftime("%d_%m_%Y")
+log.basicConfig(filename=f'files-created{date}.log', filemode='a', level=log.INFO,
                 format='{"@timestamp":"%(asctime)s","log.level":"%(levelname)s","message":"%(message)s"}')
 
 

@@ -3,8 +3,10 @@ Description=http server with python fast api
 
 [Service]
 ExecStart=/usr/bin/python3 /home/shani/sum-http-server/main.py
-WorkingDirectory=/home/shani/sum-http-server/
+ExecStop=/bin/kill -TERM $MAINPID
+WorkingDirectory=/home/shani/sum-http-server/src/
 User=shani
+Restart=always
 
 [Install]
 WantedBy=multi-user.target

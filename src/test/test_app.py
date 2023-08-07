@@ -34,7 +34,7 @@ def test_sort_files_should_replace_file_a_and_file_b_locations_in_the_list(app_f
 
 
 @pytest.mark.asyncio
-async def test_create_single_file(app_fixture, mocker):
+async def test_create_single_file(app_fixture, mock_sign_fixture, mocker):
     create_files()
     images_dir = './'
     files = [
@@ -42,9 +42,10 @@ async def test_create_single_file(app_fixture, mocker):
         UploadFile(filename='file_b.jpg', file=open('./file_b', "rb")),
     ]
     mocker.patch('app.config.IMAGES_DIR', images_dir)
-    mocker.patch('app.sign')
+
     await app_fixture.create_single_file(files)
     expected = b'ab'
     with open(os.path.join(images_dir, 'file.jpg'), 'rb') as file:
         result = file.read()
     assert result == expected
+    mock_sign_fixture.assert_called_once()

@@ -1,5 +1,6 @@
 import os
 import pytest
+from fastapi import UploadFile
 from fastapi.testclient import TestClient
 
 from help_funcs import File, create_files, prepare_create_single_file, prepare_create_upload_file
@@ -33,9 +34,17 @@ def test_sort_files_should_replace_file_a_and_file_b_locations_in_the_list(app_f
 
 @pytest.mark.asyncio
 async def test_create_single_file_should_create_a_whole_file(app_fixture, mocker):
-    await prepare_create_single_file(mocker, app_fixture)
+    create_files()
+    images_dir = './'
+    files = [
+        UploadFile(filename='file_a.jpg', file=open('./file_a', "rb")),
+        UploadFile(filename='file_b.jpg', file=open('./file_b', "rb")),
+    ]
+    mocker.patch('app.config.IMAGES_DIR', images_dir)
+
+    await app_fixture.create_single_file(files)
     expected = b'ab'
-    with open(os.path.join('./', 'file.jpg'), 'rb') as file:
+    with open(os.path.join(images_dir, 'file.jpg'), 'rb') as file:
         result = file.read()
     assert result == expected
 

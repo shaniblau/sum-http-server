@@ -33,7 +33,7 @@ def test_sort_files_should_replace_file_a_and_file_b_locations_in_the_list(app_f
 
 
 @pytest.mark.asyncio
-async def test_create_single_file_should_create_a_whole_file(app_fixture, mocker):
+async def test_create_single_file_should_create_a_whole_file(app_fixture, mocker, mock_sign_fixture):
     create_files()
     images_dir = './'
     files = [
@@ -47,9 +47,9 @@ async def test_create_single_file_should_create_a_whole_file(app_fixture, mocker
     with open(os.path.join(images_dir, 'file.jpg'), 'rb') as file:
         result = file.read()
     assert result == expected
-
-
-@pytest.mark.asyncio
-async def test_create_single_file_should_call_sign_file_once(app_fixture, mock_sign_fixture, mocker):
-    await prepare_create_single_file(mocker, app_fixture)
     mock_sign_fixture.assert_called_once()
+#
+# @pytest.mark.asyncio
+# async def test_create_single_file_should_call_sign_file_once(app_fixture, mock_sign_fixture, mocker):
+#     await prepare_create_single_file(mocker, app_fixture)
+#     mock_sign_fixture.assert_called_once()

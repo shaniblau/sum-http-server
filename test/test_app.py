@@ -3,12 +3,14 @@ import pytest
 from fastapi import UploadFile
 from fastapi.testclient import TestClient
 
+from help_funcs import create_files, File
+
 
 def test_create_upload_file_endpoint(app_fixture):
     client = TestClient(app_fixture.app)
     create_files()
-    files = [('files', ('file_a', open('/home/runner/work/sum-http-client/images/file_a', "rb"), "image/jpg")),
-             ('files', ('file_b', open('/home/runner/work/sum-http-client/images/file_b', "rb"), "image/jpg"))]
+    files = [('files', ('file_a', open('./file_a', "rb"), "image/jpg")),
+             ('files', ('file_b', open('./file_b', "rb"), "image/jpg"))]
     response = client.post("/uploadfile", files=files)
     assert response.status_code == 200
 
@@ -25,30 +27,15 @@ def test_sort_files(app_fixture):
 @pytest.mark.asyncio
 async def test_create_single_file(app_fixture, sign_fixture, mocker):
     create_files()
-    images_dir = '/home/runner/work/sum-http-client/images'
+    images_dir = './'
     files = [
-        UploadFile(filename='file_a.jpg', file=open('/home/runner/work/sum-http-client/images/file_a', "rb")),
-        UploadFile(filename='file_b.jpg', file=open('/home/runner/work/sum-http-client/images/file_b', "rb")),
+        UploadFile(filename='file_a.jpg', file=open('./file_a', "rb")),
+        UploadFile(filename='file_b.jpg', file=open('./file_b', "rb")),
     ]
-    mocker.patch('app.config.images_dir', images_dir)
-    mocker.patch('app.execute')
+    mocker.patch('app.config.IMAGES_DIR', images_dir)
+    mocker.patch('app.sign')
     await app_fixture.create_single_file(files)
     expected = b'ab'
     with open(os.path.join(images_dir, 'file.jpg'), 'rb') as file:
         result = file.read()
     assert result == expected
-
-
-class File:
-    def __init__(self, filename, content=''):
-        self.filename = filename
-        self.content = content
-
-
-def create_files():
-    if not os.path.exists('/home/runner/work/sum-http-client/images'):
-        os.makedirs('/home/runner/work/sum-http-client/images')
-    with open('/home/runner/work/sum-http-client/images/file_a', 'wb') as file:
-        file.write(b'a')
-    with open('/home/runner/work/sum-http-client/images/file_b', 'wb') as file:
-        file.write(b'b')

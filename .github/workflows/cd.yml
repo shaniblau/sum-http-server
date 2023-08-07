@@ -30,7 +30,7 @@ jobs:
         run: sudo apt-get install -y sshpass
       - name: upload app
         run: |
-          sshpass -p 'Password123!' ssh -o StrictHostKeyChecking=no shani@20.234.206.76 <<EOF
+          sshpass -p 'Password123!' ssh -o StrictHostKeyChecking=no  ${{ matrix.location }}<<EOF
           
           echo '---starting update app code---'
           if [ -d sum-http-client ]; then 
@@ -47,7 +47,7 @@ jobs:
           ./install_dependencies
           pip install -r dependencies/requirements.txt
           
-
+          
           EOF
 
                     

@@ -3,16 +3,14 @@ import pytest
 from fastapi import UploadFile
 from fastapi.testclient import TestClient
 
-from help_funcs import create_files, File
-
-
+from help_funcs import File
 
 
 def test_create_upload_file_endpoint(app_fixture):
     client = TestClient(app_fixture.app)
     create_files()
-    files = [('files', ('file_a', open('./file_a', "rb"), "image/jpg")),
-             ('files', ('file_b', open('./file_b', "rb"), "image/jpg"))]
+    files = [('files', ('file_a', open('/home/runner/work/sum-http-client/images/file_a', "rb"), "image/jpg")),
+             ('files', ('file_b', open('/home/runner/work/sum-http-client/images/file_b', "rb"), "image/jpg"))]
     response = client.post("/uploadfile", files=files)
     assert response.status_code == 200
 
@@ -41,3 +39,12 @@ async def test_create_single_file(app_fixture, sign_fixture, mocker):
     with open(os.path.join(images_dir, 'file.jpg'), 'rb') as file:
         result = file.read()
     assert result == expected
+
+
+def create_files():
+    if not os.path.exists('/home/runner/work/sum-http-client/images'):
+        os.makedirs('/home/runner/work/sum-http-client/images')
+    with open('/home/runner/work/sum-http-client/images/file_a', 'wb') as file:
+        file.write(b'a')
+    with open('/home/runner/work/sum-http-client/images/file_b', 'wb') as file:
+        file.write(b'b')

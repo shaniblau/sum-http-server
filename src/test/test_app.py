@@ -1,6 +1,5 @@
 import os
 import pytest
-from fastapi import UploadFile
 from fastapi.testclient import TestClient
 
 from help_funcs import File, create_files, prepare_create_single_file, prepare_create_upload_file

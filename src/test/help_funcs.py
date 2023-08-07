@@ -1,6 +1,8 @@
 from datetime import datetime
 import logging as log
 
+from fastapi import UploadFile
+
 
 class File:
     def __init__(self, filename, content=''):
@@ -21,3 +23,13 @@ def set_mockers(mocker, logger_fixture):
     date = datetime.now().strftime("%d_%m_%Y")
     mocker.patch('app.created_logger', logger_fixture(f'./logs/files-created/{date}.log', log.INFO))
     mocker.patch('app.error_logger', logger_fixture(f'./logs/errors.log', log.WARNING))
+
+
+def prepare_create_single_file(mocker, app_fixture):
+    create_files()
+    files = [
+        UploadFile(filename='file_a.jpg', file=open('./file_a', "rb")),
+        UploadFile(filename='file_b.jpg', file=open('./file_b', "rb")),
+    ]
+    mocker.patch('app.config.IMAGES_DIR', './')
+    await app_fixture.create_single_file(files)

@@ -26,5 +26,4 @@ jobs:
           cd ..
       - name: Test
         run: |
-          pwd
           pytest

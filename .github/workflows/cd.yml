@@ -49,10 +49,11 @@ jobs:
           
           echo '---starting all services----'
           cd deployment
+          ls
           sudo mv http_server.service /etc/systemd/system/
           find ./ -type f -name "*.service" -exec sudo mv -v {} /etc/systemd/system/ \;
-          sudo systemctl enable http_server
-          sudo systemctl restart http_server
+#          sudo systemctl enable http_server
+#          sudo systemctl restart http_server
 
           EOF
 

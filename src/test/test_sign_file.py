@@ -6,7 +6,8 @@ from unittest.mock import patch
 def test_sign_should_call_create_encrypted_hash_once(sign_fixture, mock_create_encrypted_hash_fixture):
     with patch('sign_file.open',
                side_effect=lambda file, mode: builtins.open(os.path.abspath(file), mode)) as mock_file:
-        mock_create_encrypted_hash_fixture.assert_called_once()
+        sign_fixture.sign()
+    mock_create_encrypted_hash_fixture.assert_called_once()
 
 #
 # def test_create_sha512(sign_fixture):

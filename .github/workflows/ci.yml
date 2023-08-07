@@ -28,4 +28,5 @@ jobs:
         run: |
           pwd
           ls
+          cd src
           pytest

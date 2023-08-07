@@ -1,9 +1,10 @@
 import logging as log
 import os
-from typing import List
-from configuration import config
-from fastapi import FastAPI, UploadFile
 from datetime import datetime
+
+from fastapi import FastAPI
+
+from configuration import config
 from sign_file import sign
 
 app = FastAPI()
@@ -13,20 +14,20 @@ log.basicConfig(filename=f'files-created{date}.log', filemode='a', level=log.INF
 
 
 @app.post("/uploadfile")
-async def create_upload_file(files: List[UploadFile]):
+async def create_upload_file(files):
     if not os.path.exists(config.IMAGES_DIR):
         os.mkdir(config.IMAGES_DIR)
     await create_single_file(sort_files(files))
 
 
-def sort_files(files: List[UploadFile]):
+def sort_files(files):
     if "_a" in files[0].filename:
         return files
     else:
         return [files[1], files[0]]
 
 
-async def create_single_file(files: List[UploadFile]):
+async def create_single_file(files):
     name = files[0].filename.split('_')[0]
     file_name = f'{name}.jpg'
     path = os.path.join(config.IMAGES_DIR, file_name)

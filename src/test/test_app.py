@@ -47,7 +47,7 @@ async def test_create_single_file_should_call_sign_file_once(app_fixture, mock_s
     mock_sign_fixture.assert_called_once()
 
 
-async def help_test(mocker, app_fixture, mock_sign_fixture):
+async def help_test(mocker, app_fixture):
     create_files()
     files = [
         UploadFile(filename='file_a.jpg', file=open('./file_a', "rb")),

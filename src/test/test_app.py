@@ -4,13 +4,13 @@ from fastapi import UploadFile
 from fastapi.testclient import TestClient
 from datetime import datetime
 from help_funcs import File, create_files
-
+import logging as log
 date = datetime.now().strftime("%d_%m_%Y")
 
 
 def test_create_upload_file_should_respond_with_200(app_fixture, mocker):
-    mocker.patch('app.created_logger', app_fixture.extendable_logger(f'./logs/files-created/{date}.log'))
-    mocker.patch('app.error_logger', app_fixture.extendable_logger(f'./logs/errors.log'))
+    mocker.patch('app.created_logger', app_fixture.extendable_logger(f'./logs/files-created/{date}.log', log.INFO))
+    mocker.patch('app.error_logger', app_fixture.extendable_logger(f'./logs/errors.log', log.WARNING))
     client = TestClient(app_fixture.app)
     files = create_files()
     response = client.post("/uploadfile", files=files)

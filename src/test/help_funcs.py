@@ -19,13 +19,13 @@ def create_files():
             ('files', ('file_b', open('./file_b', "rb"), "image/jpg"))]
 
 
-def set_mockers(mocker, logger_fixture):
+async def prepare_create_upload_file(mocker, logger_fixture):
     date = datetime.now().strftime("%d_%m_%Y")
     mocker.patch('app.created_logger', logger_fixture(f'./logs/files-created/{date}.log', log.INFO))
     mocker.patch('app.error_logger', logger_fixture(f'./logs/errors.log', log.WARNING))
 
 
-def prepare_create_single_file(mocker, app_fixture):
+async def prepare_create_single_file(mocker, app_fixture):
     create_files()
     files = [
         UploadFile(filename='file_a.jpg', file=open('./file_a', "rb")),

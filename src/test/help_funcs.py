@@ -9,3 +9,5 @@ def create_files():
         file.write(b'a')
     with open('./file_b', 'wb') as file:
         file.write(b'b')
+    return [('files', ('file_a', open('./file_a', "rb"), "image/jpg")),
+            ('files', ('file_b', open('./file_b', "rb"), "image/jpg"))]

@@ -2,17 +2,30 @@ import os
 import pytest
 from fastapi import UploadFile
 from fastapi.testclient import TestClient
+from datetime import datetime
+from help_funcs import File, create_files
 
-from help_funcs import File
+date = datetime.now().strftime("%d_%m_%Y")
 
 
-def test_create_upload_file_endpoint(app_fixture):
+def test_create_upload_file_should_respond_with_200(app_fixture, mocker):
     client = TestClient(app_fixture.app)
-    create_files()
-    files = [('files', ('file_a', open('/home/runner/work/sum-http-client/images/file_a', "rb"), "image/jpg")),
-             ('files', ('file_b', open('/home/runner/work/sum-http-client/images/file_b', "rb"), "image/jpg"))]
+    files = create_files()
+    mocker.patch('app.created_logger', app_fixture.extendable_logger(f'./logs/files-created/{date}.log'))
+    mocker.patch('app.error_logger', app_fixture.extendable_logger(f'./logs/errors.log'))
     response = client.post("/uploadfile", files=files)
+    print(response)
     assert response.status_code == 200
+
+
+def test_create_upload_file_should_log_error_and_response_not_200(app_fixture, mocker):
+    client = TestClient(app_fixture.app)
+    files = create_files()
+    mocker.patch('app.created_logger', app_fixture.extendable_logger(f'./logs/files-created/{date}.log'))
+    mocker.patch('app.error_logger', app_fixture.extendable_logger(f'./logs/errors.log'))
+    response = client.post("uploadfile", files=files)
+    assert response != 200
+    assert os.path.isfile('./logs/errors.log')
 
 
 def test_sort_files(app_fixture):
@@ -25,7 +38,7 @@ def test_sort_files(app_fixture):
 
 
 @pytest.mark.asyncio
-async def test_create_single_file(app_fixture, sign_fixture, mocker):
+async def test_create_single_file(app_fixture, mocker):
     create_files()
     images_dir = './'
     files = [
@@ -39,12 +52,3 @@ async def test_create_single_file(app_fixture, sign_fixture, mocker):
     with open(os.path.join(images_dir, 'file.jpg'), 'rb') as file:
         result = file.read()
     assert result == expected
-
-
-def create_files():
-    if not os.path.exists('/home/runner/work/sum-http-client/images'):
-        os.makedirs('/home/runner/work/sum-http-client/images')
-    with open('/home/runner/work/sum-http-client/images/file_a', 'wb') as file:
-        file.write(b'a')
-    with open('/home/runner/work/sum-http-client/images/file_b', 'wb') as file:
-        file.write(b'b')

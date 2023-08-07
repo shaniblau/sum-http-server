@@ -2,7 +2,6 @@ import os
 import pytest
 from fastapi import UploadFile
 from fastapi.testclient import TestClient
-from starlette.testclient import TestClient
 
 from help_funcs import File, create_files, set_mockers
 

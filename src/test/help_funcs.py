@@ -32,5 +32,5 @@ async def prepare_create_single_file(mocker, app_fixture):
         UploadFile(filename='file_b.jpg', file=open('./file_b', "rb")),
     ]
     mocker.patch('app.config.IMAGES_DIR', './')
-    mocker.patch('app.sign')
     await app_fixture.create_single_file(files)
+

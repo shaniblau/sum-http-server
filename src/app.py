@@ -1,10 +1,10 @@
 import logging as log
 import os
 from typing import List
-from src.configuration import config
+from configuration import config
 from fastapi import FastAPI, UploadFile
 from datetime import datetime
-from sign_file import execute
+from sign_file import sign
 
 app = FastAPI()
 date = datetime.now().strftime("%d_%m_%Y")
@@ -34,5 +34,5 @@ async def create_single_file(files: List[UploadFile]):
     with open(path, 'ab') as file:
         for f in files:
             file.write(await f.read())
-    execute(path)
+    sign(path)
     log.info(f'{name} created successfully')

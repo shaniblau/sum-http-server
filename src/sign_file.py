@@ -3,8 +3,7 @@ from Crypto.Random import get_random_bytes
 from Crypto.Cipher import AES
 
 
-# move to different location - done
-def execute(file_path):
+def sign(file_path):
     iv = get_random_bytes(16)
     encrypted_hash = create_encrypted_hash(file_path, iv)
     with open(file_path, 'ab') as file:

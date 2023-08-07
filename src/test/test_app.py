@@ -47,9 +47,16 @@ async def test_create_single_file_should_create_a_whole_file(app_fixture, mocker
     with open(os.path.join(images_dir, 'file.jpg'), 'rb') as file:
         result = file.read()
     assert result == expected
+
+@pytest.mark.asyncio
+async def test_create_single_file_should_call_sign_file_once(app_fixture, mock_sign_fixture, mocker):
+    create_files()
+    images_dir = './'
+    files = [
+        UploadFile(filename='file_a.jpg', file=open('./file_a', "rb")),
+        UploadFile(filename='file_b.jpg', file=open('./file_b', "rb")),
+    ]
+    mocker.patch('app.config.IMAGES_DIR', images_dir)
+
+    await app_fixture.create_single_file(files)
     mock_sign_fixture.assert_called_once()
-#
-# @pytest.mark.asyncio
-# async def test_create_single_file_should_call_sign_file_once(app_fixture, mock_sign_fixture, mocker):
-#     await prepare_create_single_file(mocker, app_fixture)
-#     mock_sign_fixture.assert_called_once()

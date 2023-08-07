@@ -20,7 +20,8 @@ async def create_upload_file(files: List[UploadFile]):
     try:
         if not os.path.exists(config.IMAGES_DIR):
             os.mkdir(config.IMAGES_DIR)
-        await create_single_file(sort_files(files), created_logger)
+        name = await create_single_file(sort_files(files))
+        created_logger.info(f'the file {name} was created successfully')
     except Exception:
         error_logger.error(f'the files {files[0].filename}, {files[1].filename} were not combined')
 
@@ -32,7 +33,7 @@ def sort_files(files: List[UploadFile]):
         return [files[1], files[0]]
 
 
-async def create_single_file(files: List[UploadFile], created_logger):
+async def create_single_file(files: List[UploadFile]):
     name = files[0].filename.split('_')[0]
     file_name = f'{name}.jpg'
     path = os.path.join(config.IMAGES_DIR, file_name)
@@ -40,4 +41,4 @@ async def create_single_file(files: List[UploadFile], created_logger):
         for f in files:
             file.write(await f.read())
     sign(path)
-    created_logger.info(f'the file {name} was created successfully')
+    return name

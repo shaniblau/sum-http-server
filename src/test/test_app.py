@@ -2,11 +2,11 @@ import os
 import pytest
 from fastapi.testclient import TestClient
 
-from help_funcs import File, create_files, prepare_create_single_file, prepare_create_upload_file
+from help_funcs import File, create_files, prepare_create_single_file
 
 
 def test_create_upload_file_should_respond_with_200(app_fixture, logger_fixture, mocker):
-    prepare_create_upload_file(mocker, logger_fixture)
+    mocker.patch('app.config.LOGS_DIR', './logs')
     client = TestClient(app_fixture.app)
     files = create_files()
     response = client.post("/uploadfile", files=files)
@@ -15,7 +15,7 @@ def test_create_upload_file_should_respond_with_200(app_fixture, logger_fixture,
 
 
 def test_create_upload_file_should_respond_not_200(app_fixture, logger_fixture, mocker):
-    prepare_create_upload_file(mocker, logger_fixture)
+    mocker.patch('app.config.LOGS_DIR', './logs')
     client = TestClient(app_fixture.app)
     files = create_files()
     response = client.post("/", files=files)

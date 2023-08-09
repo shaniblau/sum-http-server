@@ -20,12 +20,12 @@ async def create_upload_file(files: List[UploadFile]):
     try:
         if not os.path.exists(config.IMAGES_DIR):
             os.mkdir(config.IMAGES_DIR)
-        await create_single_file(_sort_files(files))
+        await create_single_file(sort_files(files))
     except Exception:
         error_logger.error(f'the files {files[0].filename}, {files[1].filename} were not combined')
 
 
-def _sort_files(files: List[UploadFile]):
+def sort_files(files: List[UploadFile]):
     if "_a" in files[0].filename:
         return files
     else:

@@ -1,6 +1,3 @@
-from datetime import datetime
-import logging as log
-
 from fastapi import UploadFile
 
 

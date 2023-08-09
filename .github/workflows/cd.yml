@@ -38,8 +38,8 @@ jobs:
               git pull origin main
           else
               git clone https://github.com/shaniblau/sum-http-server.git
+              cd sum-http-client
           fi
-          cd sum-http-client
           chmod 777 ../images/
           
           echo '---starting dependencies installment----'

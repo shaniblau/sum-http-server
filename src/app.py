@@ -11,8 +11,8 @@ from set_logger import extendable_logger
 
 app = FastAPI()
 date = datetime.now().strftime("%d_%m_%Y")
-created_logger = extendable_logger(f'../logs/files-created/{date}.log', log.INFO)
-error_logger = extendable_logger('../logs/errors.log', log.WARNING)
+created_logger = extendable_logger(f'{config.LOGS_DIR}/files-created/{date}.log', log.INFO)
+error_logger = extendable_logger(f'{config.LOGS_DIR}/errors.log', log.WARNING)
 
 
 @app.post("/uploadfile")

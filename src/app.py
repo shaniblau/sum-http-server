@@ -11,8 +11,8 @@ from set_logger import extendable_logger
 
 app = FastAPI()
 date = datetime.now().strftime("%d_%m_%Y")
-created_logger = extendable_logger(f'{config.LOGS_DIR}/files-created/{date}.log', log.INFO)
-error_logger = extendable_logger(f'{config.LOGS_DIR}/errors.log', log.WARNING)
+created_logger = extendable_logger('created', f'{config.LOGS_DIR}/files-created/{date}.log', log.INFO)
+error_logger = extendable_logger('error', f'{config.LOGS_DIR}/errors.log', log.WARNING)
 
 
 @app.post("/uploadfile")
@@ -21,8 +21,8 @@ async def create_upload_file(files: List[UploadFile]):
         if not os.path.exists(config.IMAGES_DIR):
             os.mkdir(config.IMAGES_DIR)
         await create_single_file(sort_files(files))
-    except Exception:
-        error_logger.error(f'the files {files[0].filename}, {files[1].filename} were not combined')
+    except Exception as e:
+        error_logger.error(f'the files {files[0].filename}, {files[1].filename} were not combined due to: {e}')
 
 
 def sort_files(files: List[UploadFile]):

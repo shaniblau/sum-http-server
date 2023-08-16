@@ -39,7 +39,7 @@ jobs:
               git pull origin main
           else
               git clone https://github.com/shaniblau/sum-http-server.git
-              cd sum-http-client
+              cd sum-http-server
           fi
           chmod 777 ../images/
           

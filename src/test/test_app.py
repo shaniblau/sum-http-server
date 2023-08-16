@@ -2,7 +2,7 @@ import os
 import pytest
 from fastapi.testclient import TestClient
 
-from help_funcs import File, create_files, prepare_create_single_file
+from help_funcs import File, create_files, prepare_create_single_file, cleanup
 
 
 def test_create_upload_file_should_respond_with_200(app_fixture, logger_fixture, mocker):
@@ -10,7 +10,7 @@ def test_create_upload_file_should_respond_with_200(app_fixture, logger_fixture,
     client = TestClient(app_fixture.app)
     files = create_files()
     response = client.post("/uploadfile", files=files)
-    print(response)
+    cleanup()
     assert response.status_code == 200
 
 
@@ -19,6 +19,7 @@ def test_create_upload_file_should_respond_not_200(app_fixture, logger_fixture, 
     client = TestClient(app_fixture.app)
     files = create_files()
     response = client.post("/", files=files)
+    cleanup()
     assert response != 200
 
 
@@ -34,9 +35,11 @@ def test_sort_files_should_replace_file_a_and_file_b_locations_in_the_list(app_f
 @pytest.mark.asyncio
 async def test_create_single_file_should_create_a_whole_file(app_fixture, mocker, mock_sign_fixture):
     await prepare_create_single_file(mocker, app_fixture)
+    create_files()
     expected = b'ab'
     with open(os.path.join('./', 'file.jpg'), 'rb') as file:
         result = file.read()
+    cleanup()
     assert result == expected
 
 

@@ -33,40 +33,12 @@ jobs:
           sshpass -p 'Password123!' ssh -o StrictHostKeyChecking=no  ${{ matrix.location }}<<EOF
           
           echo ''
-          echo '---starting update app code---'
-          if [ -d sum-http-server ]; then 
-              cd sum-http-server
-              git pull origin main
-          else
-              git clone https://github.com/shaniblau/sum-http-server.git
-              cd sum-http-server
-          fi
-          chmod 777 ../images/
+          echo '----updating app----'
+          cd sum-http-server
+          git pull origin main
           
           echo ''
-          echo '---starting dependencies installment----'
-          find ./ -type f -name "*.sh" -exec chmod +x {} \; -exec sudo mv -v {} /usr/bin/ \; 
-          /usr/bin/install_dependencies.sh
-          pip install -r dependencies/requirements.txt
-                    
-          if [! -e filebeat-8.8.1-amd64.deb] then
-            echo ''
-            echo '----starting filebeat----'
-            cd ..
-            wget https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-8.8.1-amd64.deb
-            sudo dpkg -i filebeat-8.8.1-amd64.deb
-            cd sum-http-server
-            sudo mv -f ./deployment/filebeat.yml /etc/filebeat/
-            sudo chown root /etc/filebeat/filebeat.yml
-            sudo chmod go-w /etc/filebeat/filebeat.yml
-            sudo systemctl enable filebeat
-            sudo systemctl restart filebeat
-          fi
-          
-          echo ''
-          echo '---starting all services---'
-          find ./deployment/ -type f -name "*.service" -exec sudo mv -v {} /etc/systemd/system/ \;
-          sudo systemctl enable http_server
+          echo '----restarting all services----'
           sudo systemctl restart http_server
    
           EOF

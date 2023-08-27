@@ -6,12 +6,12 @@ from datetime import datetime
 from fastapi import FastAPI, UploadFile
 
 from configuration import config
-from sign_file import sign
+from sign_file import digital_sign
 from set_logger import extendable_logger
 
 app = FastAPI()
-date = datetime.now().strftime("%d_%m_%Y")
-created_logger = extendable_logger('created', f'{config.LOGS_DIR}/files-created/{date}.log', log.INFO)
+current_date = datetime.now().strftime("%d_%m_%Y")
+created_logger = extendable_logger('created', f'{config.LOGS_DIR}/files-created/{current_date}.log', log.INFO)
 error_logger = extendable_logger('error', f'{config.LOGS_DIR}/errors.log', log.WARNING)
 
 
@@ -39,5 +39,5 @@ async def create_single_file(files: List[UploadFile]):
     with open(path, 'ab') as file:
         for f in files:
             file.write(await f.read())
-    sign(path)
+    digital_sign(path)
     created_logger.info(f'the file {name} was created successfully')

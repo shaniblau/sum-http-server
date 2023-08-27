@@ -22,7 +22,7 @@ def sign_fixture():
 
 @pytest.fixture
 def mock_sign_fixture(mocker):
-    return mocker.patch('app.sign')
+    return mocker.patch('app.digital_sign')
 
 
 @pytest.fixture
